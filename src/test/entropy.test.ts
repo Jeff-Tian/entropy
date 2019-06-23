@@ -10,6 +10,11 @@ describe('entropy', () => {
 
     assert(entropy(samples).toNumber() === 1)
   })
+
+  it('?', () => {
+    const samples = ['No', 'Yes', 'Yes', 'Yes', '?']
+    assert(entropy(samples).toFixed(2) === '1.37')
+  })
 })
 
 describe('information gain', () => {
