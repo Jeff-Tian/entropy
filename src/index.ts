@@ -1,18 +1,20 @@
 import { Decimal } from 'decimal.js'
 
-export function entropy<T>(samples: T[]): Decimal {
-  const count = new Map<T, number>();
+export function entropy<T>(samples: T[], by?: string): Decimal {
+  const count = new Map<T, number>()
 
   for (let i = 0; i < samples.length; i++) {
-    if (!count.has(samples[i])) {
-      count.set(samples[i], 0)
+    const key = by ? samples[i][by] : samples[i]
+
+    if (!count.has(key)) {
+      count.set(key, 0)
     }
 
-    count.set(samples[i], count.get(samples[i])! + 1)
+    count.set(key, count.get(key)! + 1)
   }
 
   return Array.from(count.values(), (value: number) => {
-    const p = Decimal.div(value, samples.length);
+    const p = Decimal.div(value, samples.length)
     return new Decimal(0).sub(p.times(Decimal.log2(p)))
   }).reduce((prev, next) => Decimal.add(prev, next), new Decimal(0))
 }

@@ -2,6 +2,7 @@
 
 > 信息熵，使用 TypeScript 实现。
 
+[![Git commit with emojis!](https://img.shields.io/badge/gitmoji-git%20commit%20with%20emojis!-brightgreen.svg)](https://gitmoji.js.org)
 [![npm download][download-image]][download-url]
 [![NPM version](https://badge.fury.io/js/entropy-ts.png)](http://badge.fury.io/js/entroy-ts)
 [![Build Status](https://travis-ci.com/Jeff-Tian/entropy.svg?branch=master)](https://travis-ci.com/Jeff-Tian/entropy)
@@ -27,12 +28,11 @@ npm install entropy-ts
 ```
 
 ## 使用
+
 ```typescript
 import { entropy } from 'entropy-ts'
 
-const samples = [
-  '+', '+', '-', '+', '-', '-'
-]
+const samples = ['+', '+', '-', '+', '-', '-']
 
 const res = entropy(samples)
 
