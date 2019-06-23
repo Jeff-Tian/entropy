@@ -1,16 +1,16 @@
-export function findS(samples: any[], concept: string, attributes: string[]) {
-  const h = {}
-  attributes.map(v => h[v] = null);
+export function entropy<T>(samples: T[]) {
+  const count = new Map<T, number>();
 
-  samples.map((value, index, array) => {
-    if (value[concept] === 'Yes') {
-      attributes.map(a => {
-        if (value[a] !== h[a]) {
-          h[a] = h[a] === null ? value[a] : '?'
-        }
-      })
+  for (let i = 0; i < samples.length; i++) {
+    if (!count.has(samples[i])) {
+      count.set(samples[i], 0)
     }
-  })
 
-  return h;
+    count.set(samples[i], count.get(samples[i])! + 1)
+  }
+
+  return Array.from(count.values(), (value: number) => {
+    const p = value / samples.length;
+    return -p * Math.log2(p)
+  }).reduce((prev, next) => prev + next, 0)
 }

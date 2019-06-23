@@ -1,92 +1,42 @@
-# find-s
+# entropy-ts
 
-> 寻找极大特殊假设
+> 信息熵，使用 TypeScript 实现。
 
 [![npm download][download-image]][download-url]
-[![NPM version](https://badge.fury.io/js/find-s.png)](http://badge.fury.io/js/find-s)
-[![Build Status](https://travis-ci.com/Jeff-Tian/find-s.svg?branch=master)](https://travis-ci.com/Jeff-Tian/find-s)
-[![Dependencies Status](https://david-dm.org/Jeff-Tian/find-s.png)](https://david-dm.org/jeff-tian/find-s)
-[![Coverage Status](https://coveralls.io/repos/github/Jeff-Tian/find-s/badge.svg?branch=master)](https://coveralls.io/github/Jeff-Tian/find-s?branch=master)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/Jeff-Tian/find-s)
+[![NPM version](https://badge.fury.io/js/entropy-ts.png)](http://badge.fury.io/js/entroy-ts)
+[![Build Status](https://travis-ci.com/Jeff-Tian/entropy.svg?branch=master)](https://travis-ci.com/Jeff-Tian/entropy)
+[![Dependencies Status](https://david-dm.org/Jeff-Tian/entropy-ts.png)](https://david-dm.org/jeff-tian/entropy-ts)
+[![Coverage Status](https://coveralls.io/repos/github/Jeff-Tian/entroy/badge.svg?branch=master)](https://coveralls.io/github/Jeff-Tian/entropy?branch=master)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/Jeff-Tian/entropy)
 
-[download-image]: https://img.shields.io/npm/dm/find-s.svg?style=flat-square
-[download-url]: https://npmjs.org/package/find-s
+[download-image]: https://img.shields.io/npm/dm/entropy-ts.svg?style=flat-square
+[download-url]: https://npmjs.org/package/entropy-ts
 
-## FIND-S 算法
+## 信息熵
 
-1. 将 h 初始化为 H 中最特殊假设
-2. 对每个正例 x
+在机器学习中，熵刻画了任意样例集的纯度。给定包含关于某个目标概念的正反样例的样例集 S，那么 S 相对这个布尔型分类的熵为：
 
-  - 对 h 的每个属性约束 a<sub>i</sub>
-      如果 x 满足 a<sub>i</sub>
-      那么不做任何处理
-      否则将 h 中 a<sub>i</sub> 替换为 x 满足的下一个更一般约束
+> Entropy(S) = -p<sub>+</sub>log<sub>2</sub>(p<sub>+</sub>) - p<sub>-</sub>log<sub>2</sub>(p<sub>-</sub>)
 
-3. 输出假设 h
-
+其中，p<sub>+</sub>是在 S 中正例的比例，p<sub>-</sub>是在 S 中反例的比例。在有关熵的所有计算中我们定义 0log0 为 0。
 
 ## 安装
 
 ```shell
-npm install find-s
+npm install entropy-ts
 ```
 
 ## 使用
 ```typescript
-import { findS } from 'find-s'
+import { entropy } from 'entropy-ts'
 
 const samples = [
-  {
-    Sky: 'Sunny',
-    AirTemp: 'Warm',
-    Humidity: 'Normal',
-    Wind: 'Strong',
-    Water: 'Warm',
-    Forecast: 'Same',
-    EnjoySport: 'Yes'
-  },
-
-  {
-    Sky: 'Sunny',
-    AirTemp: 'Warm',
-    Humidity: 'High',
-    Wind: 'Strong',
-    Water: 'Warm',
-    Forecast: 'Same',
-    EnjoySport: 'Yes'
-  },
-
-  {
-    Sky: 'Rainy',
-    AirTemp: 'Cold',
-    Humidity: 'High',
-    Wind: 'Strong',
-    Water: 'Warm',
-    Forecast: 'Change',
-    EnjoySport: 'No'
-  },
-
-  {
-    Sky: 'Sunny',
-    AirTemp: 'Warm',
-    Humidity: 'High',
-    Wind: 'Strong',
-    Water: 'Cool',
-    Forecast: 'Change',
-    EnjoySport: 'Yes'
-  }
+  '+', '+', '-', '+', '-', '-'
 ]
 
-const res = findS(samples, 'EnjoySport', ['Sky', 'AirTemp', 'Humidity', 'Wind', 'Water', 'Forecast'])
+const res = entropy(samples)
 
-assert.deepStrictEqual(res, {
-        Sky: 'Sunny',
-        AirTemp: 'Warm',
-        Humidity: '?',
-        Wind: 'Strong',
-        Water: '?',
-        Forecast: '?'
-      })
+assert.deepStrictEqual(res, 1)
 ```
 
 ## 开发

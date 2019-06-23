@@ -1,7 +1,7 @@
 {
-  "name": "find-s",
+  "name": "entropy-ts",
   "version": "0.0.1",
-  "description": "寻找极大特殊假设",
+  "description": "信息熵",
   "main": "lib/index.js",
   "directories": {
     "lib": "lib",
@@ -15,10 +15,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Jeff-Tian/citi-oauth.git"
+    "url": "git@github.com:Jeff-Tian/entropy.git"
   },
   "author": "jeff.tian@outlook.com",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@types/node": "^11.9.4",
     "axios": "latest",
