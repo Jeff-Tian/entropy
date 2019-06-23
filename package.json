@@ -22,6 +22,7 @@
   "dependencies": {
     "@types/node": "^11.9.4",
     "axios": "latest",
+    "decimal.js": "^10.2.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
@@ -32,7 +33,7 @@
     "espower-typescript": "^9.0.1",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^13.3.0",
+    "nyc": "^14.1.1",
     "power-assert": "^1.6.1",
     "prettier": "^1.16.2",
     "prettier-tslint": "^0.4.2",
